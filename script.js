@@ -87,6 +87,22 @@ function switchForm(formType) {
     }
 }
 
+// Remove the 'onclick' from your HTML buttons and add these classes:
+// <button id="btn-signin">Sign In</button>
+// <button id="btn-signup">Sign Up</button>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnSignin = document.getElementById('btn-signin');
+    const btnSignup = document.getElementById('btn-signup');
+
+    if(btnSignup) {
+        btnSignup.addEventListener('click', () => switchForm('signup'));
+    }
+    if(btnSignin) {
+        btnSignin.addEventListener('click', () => switchForm('signin'));
+    }
+});
+
 // --- Password Show/Hide Toggle ---
 function togglePassword(icon) {
     // Find the input field relative to the clicked icon
