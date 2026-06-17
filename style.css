@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-cyan: #3c4e46;
+    --primary-purple: green;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    color: var(--text-main);
+}
+
+/* Animated Background Gradient */
+body::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, #00330800 0%, #002203 50%, #3faa0d 100%);
+    animation: rotateBg 20s linear infinite;
+    z-index: -2;
+}
+
+@keyframes rotateBg {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Floating Blobs */
+.blob {
+    position: absolute;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.6;
+    animation: float 10s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    /* background: var(--primary-purple); */
+    background: #3faa0d;
+    top: -100px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 350px;
+    height: 350px;
+    /* background: var(--primary-cyan); */
+    background: #3faa0d;
+    bottom: -50px;
+    right: -50px;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+/* Glassmorphism Container */
+.glass-container {
+    width: 100%;
+    max-width: 420px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    transition: all 0.4s ease;
+}
+
+/* Sliding gradient */
+/* .glass-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0, 255, 100, 0.2),
+        rgba(0, 255, 150, 0.4),
+        transparent
+    );
+    transition: left 0.6s ease;
+    z-index: -1;
+} */
+
+.glass-container:hover::before {
+    left: 100%;
+}
+
+.glass-container:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 100, 0.5);
+    box-shadow:
+        0 12px 40px rgba(0, 255, 100, 0.2),
+        0 0 20px rgba(0, 255, 100, 0.3);
+}
+
+/* Form Toggle */
+.form-toggle {
+    display: flex;
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    margin-bottom: 30px;
+    padding: 5px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.toggle-btn.active {
+    color: var(--text-main);
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: calc(50% - 5px);
+    height: calc(100% - 10px);
+    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+    border-radius: 30px;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1;
+}
+
+/* Form Styling */
+.form-wrapper {
+    position: relative;
+    min-height: 380px;
+}
+
+.auth-form {
+    position: absolute;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.active-form {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.hidden-form {
+    opacity: 0;
+    transform: translateX(40px);
+    pointer-events: none;
+}
+
+#signup-form.hidden-form {
+    transform: translateX(-40px);
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    background: linear-gradient(to right, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.input-group input:focus {
+    border-color: var(--primary-cyan);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+.input-group input:focus + .icon,
+.input-group input:not(:placeholder-shown) + .icon {
+    color: var(--primary-cyan);
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.eye-icon:hover {
+    color: white;
+}
+
+/* Options & Checkbox */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.forgot-pwd {
+    color: var(--primary-cyan);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.forgot-pwd:hover {
+    text-shadow: 0 0 8px var(--primary-cyan);
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(72, 83, 73, 0.4);
+}
+
+/* Social Login */
+.social-login {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-login p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.social-login p::before,
+.social-login p::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 25%;
+    height: 1px;
+    background: var(--glass-border);
+}
+
+.social-login p::before { left: 0; }
+.social-login p::after { right: 0; }
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+    border-color: var(--primary-cyan);
+    color: var(--primary-cyan);
+}
+
+/* Error Validation Animation */
+.shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    border-color: #ff3366 !important;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .glass-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}
+
+
+/* Pop ups styling for authentication instead of the alerts!!! */
+/* --- Custom Toast Notification System --- */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none; /* Prevents invisible container from blocking clicks */
+}
+
+.custom-toast {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    /* Default side border color is cyan */
+    border-left: 4px solid var(--primary-cyan); 
+    color: var(--text-main);
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 280px;
+    
+    /* Animation Setup: Start hidden off-screen to the right */
+    transform: translateX(120%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* When the JS adds this class, it slides in! */
+.custom-toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Error variations */
+.custom-toast.error {
+    border-left-color: #ff3366; /* Red border for errors */
+}
+
+
+
+
+
+/* --- Professional Developer Signature --- */
+.dev-signature {
+    position: absolute; /* Removes it from the flex layout so it doesn't push the form */
+    bottom: 20px; /* Pins it to the bottom of the screen */
+    left: 0;
+    width: 100%; /* Ensures the text stays perfectly centered */
+    text-align: center;
+    padding: 10px 0;
+    z-index: 100; /* Keeps it above the floating blobs */
+}
+
+.dev-signature p {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5); /* Slightly faded white so it blends into the glass theme */
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.dev-signature a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.dev-signature a:hover {
+    color: var(--text-main);
+    text-shadow: 0 0 8px var(--primary-cyan);
+}
