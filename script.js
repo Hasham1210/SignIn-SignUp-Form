@@ -25,13 +25,13 @@ import {
 
 //Configuration of firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyBe2KPdQ3pCgDtC8kKYBM-MhTLBpQViDcE",
-    authDomain: "signin-signup-page-9d6d1.firebaseapp.com",
-    projectId: "signin-signup-page-9d6d1",
-    storageBucket: "signin-signup-page-9d6d1.firebasestorage.app",
-    messagingSenderId: "999626827331",
-    appId: "1:999626827331:web:c4356d1ef4245016c756f6"
-  };
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
+};
 
 //Firebae Initialization
   const app = initializeApp(firebaseConfig);
